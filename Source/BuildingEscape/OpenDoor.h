@@ -28,6 +28,10 @@ private:
 	void OpenDoor(float DeltaTime);
 	void CloseDoor(float DeltaTime);
 	void MoveDoor();
+	float TotalMassOfActors() const;
+	void FindPressurePlate();
+	void FindAudioComponent();
+	void PlayDoorSound(bool IsDoorOpening);
 
 	float m_InitialYaw;
 	float m_CurrentYaw;  // doesn't really need to be member var, assigned and used in TickComponent()
@@ -35,9 +39,7 @@ private:
 		float m_TargetYaw = 90.f;
 
 	UPROPERTY(EditAnywhere)
-		ATriggerVolume* m_PressurePlate;
-	UPROPERTY(EditAnywhere)
-		AActor* m_OpeningActor;
+		ATriggerVolume* m_PressurePlate = nullptr;
 
 	UPROPERTY(EditAnywhere)
 		float m_OpeningSpeed = 2.f;
@@ -46,4 +48,11 @@ private:
 	float m_DoorLastOpened = 0.f;
 	UPROPERTY(EditAnywhere)
 		float m_DoorCloseDelay = 2.f;
+	UPROPERTY(EditAnywhere)
+		float m_MassToOpenDoors = 50.f;
+
+	UPROPERTY()
+		UAudioComponent* m_AudioComponent = nullptr;
+
+	bool m_IsDoorOpen = false;
 };

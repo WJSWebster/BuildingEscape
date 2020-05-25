@@ -23,7 +23,9 @@ public:
 
 	void Grab();
 	void Release();
-	FHitResult RayCast() const;  // return the first actor within reach with physics body
+	FVector GetPlayerViewPointReach() const;
+	FVector GetPlayerViewPointPosAndReach(FVector& Begin) const;
+	FHitResult GetFirstPhysicsBodyInReach() const;  // return the first actor within reach with physics body
 
 protected:
 	// Called when the game starts
@@ -34,7 +36,9 @@ private:
 	void SetupInputComponent();
 
 	UPROPERTY(EditAnywhere)
-		float m_Reach = 100.f;
-	UPhysicsHandleComponent* m_PhysicsHandle = nullptr;
-	UInputComponent* m_InputComponent = nullptr;
+		float m_Reach = 200.f;
+	UPROPERTY()
+		UPhysicsHandleComponent* m_PhysicsHandle = nullptr;
+	UPROPERTY()
+		UInputComponent* m_InputComponent = nullptr;
 };
